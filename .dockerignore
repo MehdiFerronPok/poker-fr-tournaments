@@ -1,0 +1,7 @@
+﻿.git
+**/__pycache__
+**/*.pyc
+.env
+admin/SECRETS-local.txt
+web/node_modules
+web/.next
