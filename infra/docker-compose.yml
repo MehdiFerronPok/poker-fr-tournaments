@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgis/postgis:14-3.3
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: app
+      POSTGRES_DB: poker
+    ports:
+      - "5433:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  api:
+    build: ../api
+    environment:
+      DATABASE_URL: postgresql+psycopg://app:app@db:5432/poker
+      ADMIN_USERNAME: ${ADMIN_USERNAME:-admin}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-admin}
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"
+
+volumes:
+  db_data:

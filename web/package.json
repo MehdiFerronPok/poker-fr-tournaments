@@ -1,0 +1,32 @@
+{
+  "name": "poker-fr-tournaments-web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "playwright test"
+  },
+  "dependencies": {
+    "next": "14.0.3",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "axios": "1.4.0",
+    "maplibre-gl": "3.3.2"
+  },
+  "devDependencies": {
+    "@types/node": "20.8.10",
+    "@types/react": "18.2.18",
+    "@types/react-dom": "18.2.7",
+    "autoprefixer": "10.4.14",
+    "eslint": "8.50.0",
+    "eslint-config-next": "14.0.3",
+    "playwright": "1.38.0",
+    "postcss": "8.4.31",
+    "prettier": "2.8.8",
+    "tailwindcss": "3.4.0",
+    "typescript": "5.2.2"
+  }
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Poker Demo RSS</title>
+    <item>
+      <title>Deepstack Demo</title>
+      <link>https://example.com/deepstack</link>
+      <description>Tournoi Deepstack. Buy-in: 100 €</description>
+      <pubDate>Mon, 22 Sep 2025 12:00:00 +0200</pubDate>
+    </item>
+    <item>
+      <title>Omaha Demo</title>
+      <link>https://example.com/omaha</link>
+      <description>Tournoi Omaha. Buy in: 50 €</description>
+      <pubDate>Tue, 23 Sep 2025 18:00:00 +0200</pubDate>
+    </item>
+  </channel>
+</rss>

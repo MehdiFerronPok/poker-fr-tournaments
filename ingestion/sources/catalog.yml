@@ -1,0 +1,10 @@
+sources:
+  - name: demo_rss
+    type: rss
+    url: "https://poker-demo.local/rss.xml"
+    enabled: true
+  - name: demo_html
+    type: html
+    url: "https://poker-demo.local/index.html"
+    enabled: true
+  # Additional sources (CSV/ICS) can be added here with appropriate fields.

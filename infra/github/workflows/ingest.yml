@@ -1,0 +1,40 @@
+name: Data Ingestion
+
+on:
+  schedule:
+    # Run every day at 05:00 Europe/Paris
+    - cron: '0 3 * * *'  # GitHub uses UTC; 05:00 Paris = 03:00 UTC when DST off
+  workflow_dispatch:
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    env:
+      TZ: {{TIMEZONE}}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r api/requirements.txt
+          pip install -r requirements.txt || true
+
+      - name: Run ingestion
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          GEOCODER_USER_AGENT: ${{ secrets.GEOCODER_USER_AGENT }}
+          GEOCODER_MIN_DELAY_SECONDS: '1'
+        run: |
+          python ingestion/run_all.py
+          python normalize/normalizer.py
+
+      - name: Post metrics as job summary
+        run: |
+          echo "Ingestion completed on $(date -u)." >> $GITHUB_STEP_SUMMARY

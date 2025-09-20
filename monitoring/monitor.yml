@@ -1,0 +1,32 @@
+name: Monitoring
+
+on:
+  schedule:
+    - cron: '0 */2 * * *'  # every 2 hours
+  workflow_dispatch:
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Install Python deps
+        run: |
+          pip install requests sqlalchemy
+      - name: Run endpoint checks
+        env:
+          API_URL: ${{ secrets.MONITOR_API_URL }}
+        run: python monitoring/endpoint_checks.py
+      - name: Check data freshness
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: python monitoring/data_freshness.py
+      - name: Detect anomalies
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: python monitoring/anomaly_detection.py
+      - name: Summarise
+        run: echo "Monitoring completed on $(date -u)" >> $GITHUB_STEP_SUMMARY
